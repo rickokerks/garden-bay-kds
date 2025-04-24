@@ -9,6 +9,10 @@ export default StyleSheet.create({
         justifyContent: 'space-between',
         paddingHorizontal: 20,
     },
+    logoContainer: {
+        flex: 1,
+        alignItems: 'center',
+    },
     logo: {
         width: 140,
         height: 50,
@@ -30,4 +34,13 @@ export default StyleSheet.create({
         color: '#fff',
         fontSize: 13,
     },
+    profileButton: {
+        marginLeft: 20,
+        width: 36,
+        height: 36,
+        borderRadius: 18,
+        backgroundColor: 'rgba(255, 255, 255, 0.15)',
+        justifyContent: 'center',
+        alignItems: 'center',
+    }
 });

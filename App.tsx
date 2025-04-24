@@ -5,7 +5,7 @@ import OrderCard from './components/OrderCard';
 import styles from './App.styles'; // Import the styles
 
 export default function App() {
-  const [sidebarVisible, setSidebarVisible] = useState(false);
+  const [logoutButtonVisible, setLogoutButtonVisible] = useState(false);
   const [activeTab, setActiveTab] = useState('All'); // State to track the active tab
   const [searchQuery, setSearchQuery] = useState(''); // State for the search bar
   const [allOrders, setAllOrders] = useState([
@@ -17,12 +17,13 @@ export default function App() {
   const [priorityOrders, setPriorityOrders] = useState<Array<{ orderId: string; items: { name: string; quantity: number }[]; status: string }>>([]);
   const [readyOrders, setReadyOrders] = useState<Array<{ orderId: string; items: { name: string; quantity: number }[]; status: string }>>([]);
 
-  const toggleSidebar = () => {
-    setSidebarVisible((prevVisible) => !prevVisible);
+  const toggleLogoutButton = () => {
+    setLogoutButtonVisible((prevVisible) => !prevVisible);
   };
 
   const handleLogout = () => {
     console.log('Logged out');
+    setLogoutButtonVisible(false);
   };
 
   const handleTabPress = (tab: string) => {
@@ -63,7 +64,7 @@ export default function App() {
 
   return (
     <View style={{ flex: 1 }}>
-      <Header onMenuPress={toggleSidebar} />
+      <Header onMenuPress={toggleLogoutButton} />
 
       {/* Tabs Container */}
       <View style={styles.tabsContainer}>
@@ -107,25 +108,18 @@ export default function App() {
         {activeTab === 'Ready' && renderOrders(readyOrders)}
       </View>
 
-      {sidebarVisible && (
-        <TouchableWithoutFeedback onPress={toggleSidebar}>
-          <View style={styles.overlay} />
-        </TouchableWithoutFeedback>
-      )}
-
-      {sidebarVisible && (
-        <View style={styles.sidebar}>
-          {/* You can add sidebar menu items here */}
-          <View style={{ flex: 1 }}>
-            {/* This is where your sidebar content would go */}
-          </View>
-
+      {/* Logout Button (visible when profile icon is clicked) */}
+      {logoutButtonVisible && (
+        <>
+          <TouchableWithoutFeedback onPress={toggleLogoutButton}>
+            <View style={styles.overlay} />
+          </TouchableWithoutFeedback>
           <TouchableWithoutFeedback onPress={handleLogout}>
-            <View style={styles.logoutButton}>
-              <Text style={styles.logoutButtonText}>Logout</Text>
+            <View style={styles.logoutButtonPopup}>
+              <Text style={styles.logoutButtonText}>Sign Out</Text>
             </View>
           </TouchableWithoutFeedback>
-        </View>
+        </>
       )}
     </View>
   );

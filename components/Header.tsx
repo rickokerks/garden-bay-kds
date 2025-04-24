@@ -26,15 +26,6 @@ const Header: React.FC<Props> = ({ onMenuPress }) => {
 
     return (
         <View style={styles.header}>
-            <TouchableOpacity onPress={onMenuPress}>
-                <Feather name="menu" size={24} color="#fff" />
-            </TouchableOpacity>
-
-            <Image
-                source={require('../assets/gardenbaylogo2.png')}
-                style={styles.logo}
-            />
-
             <View style={styles.timeContainer}>
                 <View style={styles.timeRow}>
                     <Feather name="calendar" size={16} color="#fff" style={styles.icon} />
@@ -45,6 +36,17 @@ const Header: React.FC<Props> = ({ onMenuPress }) => {
                     <Text style={styles.timeText}>{currentTime}</Text>
                 </View>
             </View>
+
+            <View style={styles.logoContainer}>
+                <Image
+                    source={require('../assets/gardenbaylogo2.png')}
+                    style={styles.logo}
+                />
+            </View>
+
+            <TouchableOpacity style={styles.profileButton} onPress={onMenuPress}>
+                <Feather name="user" size={22} color="#fff" />
+            </TouchableOpacity>
         </View>
     );
 };
